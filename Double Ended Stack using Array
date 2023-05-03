@@ -1,0 +1,173 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+# define SIZE 10
+
+class double_ended_stack
+{
+   int topA,topB;
+   int arr[SIZE];
+   public:
+    double_ended_stack()
+    {
+        topA=-1;
+        topB=SIZE;
+        for(int i=0; i<SIZE; i++)
+        {
+            arr[i]=0;
+        }
+    }
+
+    ~double_ended_stack()
+    {
+
+    }
+
+    void pushA(int d)
+    {
+        if(!isFull())
+        {
+            topA=topA+1;
+            arr[topA]=d;
+        }
+        else
+        {
+            cout<<"\nStack A overflow occurred";
+        }
+    }
+
+    void pushB(int d)
+    {
+        if(!isFull())
+        {
+            topB=topB-1;
+            arr[topB]=d;
+        }
+        else
+        {
+            cout<<"\nStack B overflow occurred";
+        }
+    }
+
+    int popA()
+    {
+        int data=-9999;
+        if(!isEmptyA())
+        {
+            data=arr[topA];
+            topA=topA-1;
+        }
+        else
+        {
+            cout<<"\nStack A is empty!"<<endl;
+        }
+        return data;
+    }
+
+    int popB()
+    {
+        int data=-9999;
+        if(!isEmptyB())
+        {
+            data=arr[topB];
+            topB=topB+1;
+        }
+        else
+        {
+            cout<<"\nStack B is empty!"<<endl;
+        }
+        return data;
+    }
+
+    int peekA()
+    {
+        if(isEmptyA())
+        {
+            cout<<"\nStack A is empty!"<<endl;
+        }
+        return arr[topA];
+    }
+    
+    int peekB()
+    {
+        if(isEmptyB())
+        {
+            cout<<"\nStack B is empty!"<<endl;
+        }
+        return arr[topB];
+    }
+
+    bool isEmptyA()
+    {
+        if(topA==-1)
+        {
+            return true;
+        }
+        else
+           return false;
+    }
+    
+    bool isEmptyB()
+    {
+        if(topB==SIZE)
+        {
+            return true;
+        }
+        else
+           return false;
+    }
+
+    bool isFull()
+    {
+        if(abs(topA-topB)==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void display()
+    {
+        int i;
+        cout<<"\nStack A elements: ";
+        for(i=0;i<=topA;i++)
+        {
+            cout<<arr[i]<<" ";
+        }
+
+        cout<<"\nStack B elements: ";
+        for(i=SIZE-1;i>=topB;i--)
+        {
+            cout<<arr[i]<<" ";
+        }
+    }
+};
+
+int main()
+{
+    double_ended_stack obj;
+    obj.pushA(1);
+    obj.pushA(2);
+    obj.pushA(3);
+
+    obj.pushB(11);
+    obj.pushA(4);
+    obj.pushB(12);
+    obj.pushA(5);
+    obj.pushA(6);
+    obj.pushB(13);
+    obj.pushB(14);
+    obj.pushB(15);
+    // cout<<" "<<obj.isFull();
+    // obj.display();
+
+    cout<<"\nDeleted data: "<<obj.popA();
+    cout<<"\nDeleted data: "<<obj.popB();
+    cout<<"\nDeleted data: "<<obj.popA();
+    obj.display();
+    return 0;
+}
