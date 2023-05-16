@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int num, maxDeadline, total_profit;
+    maxDeadline = -1;
+    total_profit = 0;
+    num = 0;
+
+    cout << "\nEnter the total number of jobs : ";
+    cin >> num;
+    vector<pair<int, pair<int, int>>> jobs(num);
+    vector<int> time_slot;
+
+    for (int i = 0; i < num; i++)
+    {
+        cout << "\nEnter profit of job " << i + 1 << ": ";
+        cin >> jobs[i].first;
+
+        cout << "\nEnter deadline of job " << i + 1 << ": ";
+        cin >> jobs[i].second.first;
+        if (jobs[i].second.first > maxDeadline)
+        {
+            maxDeadline = jobs[i].second.first;
+        }
+        jobs[i].second.second = i + 1;
+    }
+
+    for (int i = 0; i < maxDeadline; i++)
+    {
+        time_slot.push_back(-1);
+    }
+
+    sort(jobs.begin(), jobs.end());
+
+    for (int i = jobs.size() - 1; i >= 0; i--)
+    {
+        for (int j = jobs[i].second.first - 1; j >= 0; j--)
+        {
+            if (time_slot[j] == (-1))
+            {
+                time_slot[j] = jobs[i].second.second;
+                total_profit = total_profit + jobs[i].first;
+                break;
+            }
+        }
+    }
+
+    int i = 0;
+    while (i < maxDeadline)
+    {
+        cout << "\nSlot " << i + 1 << ": " << time_slot[i];
+        i++;
+    }
+
+    cout << "\nTotal profit " << total_profit;
+
+    return 0;
+}
