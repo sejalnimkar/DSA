@@ -10,26 +10,39 @@ void DFS(int vert)
 {
    if(!visited[vert])
    {
-      visited[vert]=True;
+      visited[vert]=true;
       cout<<vert<<" ";
-      for(int i=0;i<matrix[var].size(){
-         if(!visited(matrix[vert][i])){
-             DFS([matrix[vert][i]);
-           }
+      for(int i=0;i<matrix[vert].size();i++)
+      {
+         if(!visited[matrix[vert][i]])
+         {
+             DFS(matrix[vert][i]);
+         }
       }
+   }
 }
 
 void BFS(int vert)
 {
    queue<int> Q;
-   int var=Q.front();
-   Q.pop();
-   visited[var]=True;
-   cout<<var<<" ";
-   for(int i=0;i<matrix[var].size();i++){
-      if(!visited[matrix[var][i]){
-         Q.push(matrix[var][i];
-      }
+   Q.push(vert);
+   visited[vert]=true;
+   
+   while(!Q.empty())
+   {
+       int var=Q.front();
+       Q.pop();
+       cout<<var<<" ";
+       
+       
+       for(int i=0;i<matrix[vert].size();i++)
+       {
+          if(!visited[matrix[vert][i]])
+          {
+             Q.push(matrix[vert][i]);
+             visited[matrix[vert][i]]=true;
+          }
+       }
    }
 }
 
@@ -55,9 +68,11 @@ int main()
     {
         if (!visited[i])
         {
-            DFS(i);
+            //DFS(i);
+            BFS(i);
         }
     }
 
     return 0;
 }
+
