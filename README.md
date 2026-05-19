@@ -1,2 +1,2 @@
 # DSA
-Contains all the programs of data structures coded using C++
+Contains all programs and files which were created to study data structures (coded using C++)
